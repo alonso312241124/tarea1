@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de las encuestas</title>
+</head>
+<body>
+
+<div id="encuestas">
+
+    <form action="#" method="get">
+        <label for="filtroSatisfaccion">Filtrar por nivel de satisfacción:</label>
+        <select name="filtroSatisfaccion" id="filtroSatisfaccion">
+            <option value="">Mostrar todas</option>
+            <option value="Muy Satisfecho" th:selected="${filtroSatisfaccion == 'Muy Satisfecho'}">Muy Satisfecho</option>
+            <option value="Satisfecho" th:selected="${filtroSatisfaccion == 'Satisfecho'}">Satisfecho</option>
+            <option value="Neutral" th:selected="${filtroSatisfaccion == 'Neutral'}">Neutral</option>
+            <option value="Insatisfecho" th:selected="${filtroSatisfaccion == 'Insatisfecho'}">Insatisfecho</option>
+            <option value="Muy Insatisfecho" th:selected="${filtroSatisfaccion == 'Muy Insatisfecho'}">Muy Insatisfecho</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <ul>
+        <li th:each="encuesta : ${encuestas}">
+            <span th:text="${encuesta.nombre}"></span>
+            <span th:text="${encuesta.fecha}"></span>
+            <span th:text="${encuesta.nivelSatisfaccion}"></span>
+
+            <a th:href="@{/encuesta/view/{id}(id=${encuesta.id})}">ver</a>
+            <a th:href="@{/encuesta/del/{id}(id=${encuesta.id})}">borrar</a>
+            <a th:href="@{/encuesta/edit/{id}(id=${encuesta.id})}">editar</a>
+        </li>
+        <br>
+        Número de encuestas:
+        <a th:text="${#lists.size(encuestas)}"></a>
+
+        <br>
+        Promedio de edad de los encuestados:
+        <span th:text="${promedioEdades}"></span> años
+
+        <br>
+        Desglose del nivel de satisfacción
+        <ul>
+            <li>Muy Satisfecho: <span th:text="${muySatisfechoPorcentaje}"></span>%</li>
+            <li>Satisfecho: <span th:text="${satisfechoPorcentaje}"></span>%</li>
+            <li>Neutral: <span th:text="${neutralPorcentaje}"></span>%</li>
+            <li>Insatisfecho: <span th:text="${insatisfechoPorcentaje}"></span>%</li>
+            <li>Muy Insatisfecho: <span th:text="${muyInsatisfechoPorcentaje}"></span>%</li>
+        </ul>
+    </ul>
+</div>
+</body>
+</html>

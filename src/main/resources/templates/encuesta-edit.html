@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Encuesta</title>
+</head>
+<body>
+<h1>Editar Encuesta</h1>
+
+<form th:action="@{/encuesta/edit/{id}(id=${encuesta.id})}" method="POST" th:object="${encuesta}">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre" th:field="*{nombre}" required>
+    <br>
+
+    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" th:field="*{apellidos}" required>
+    <br>
+
+    <input type="email" id="email" name="email" placeholder="Email" th:field="*{email}" required>
+    <br>
+
+    <input type="number" id="edad" name="edad" placeholder="Edad" th:field="*{edad}" required>
+    <br>
+
+    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" th:field="*{telefono}" required>
+    <br>
+
+    <input type="date" id="fecha" name="fecha" th:value="${#temporals.format(encuesta.fecha, 'yyyy-MM-dd')}" required>
+    <br>
+
+    <select id="motivoVisita" name="motivoVisita" th:field="*{motivoVisita}" required>
+        <option value="" disabled>Seleccione el motivo de la visita</option>
+        <option value="Trabajo" th:selected="${encuesta.motivoVisita == 'Trabajo'}">Trabajo</option>
+        <option value="Estudio" th:selected="${encuesta.motivoVisita == 'Estudio'}">Estudio</option>
+        <option value="Turismo" th:selected="${encuesta.motivoVisita == 'Turismo'}">Turismo</option>
+        <option value="Otros" th:selected="${encuesta.motivoVisita == 'Otros'}">Otros</option>
+    </select>
+    <br>
+
+    <span>Servicios utilizados durante la estancia:</span><br>
+    <input type="checkbox" th:field="*{restaurante}" th:checked="${encuesta.restaurante}"/>Restaurante<br>
+    <input type="checkbox" th:field="*{gimnasio}" th:checked="${encuesta.gimnasio}"/>Gimnasio<br>
+    <input type="checkbox" th:field="*{spa}" th:checked="${encuesta.spa}"/>Spa<br>
+    <input type="checkbox" th:field="*{piscina}" th:checked="${encuesta.piscina}"/>Piscina<br>
+    <input type="checkbox" th:field="*{roomService}" th:checked="${encuesta.roomService}"/>Room Service<br>
+    <br>
+
+    <span>Nivel de satisfacción:</span><br>
+    <input type="radio" id="muySatisfecho" name="nivelSatisfaccion" value="Muy Satisfecho" th:field="*{nivelSatisfaccion}" th:checked="${encuesta.nivelSatisfaccion == 'Muy Satisfecho'}" />
+    <label for="muySatisfecho">Muy Satisfecho</label><br>
+
+    <input type="radio" id="satisfecho" name="nivelSatisfaccion" value="Satisfecho" th:field="*{nivelSatisfaccion}" th:checked="${encuesta.nivelSatisfaccion == 'Satisfecho'}" />
+    <label for="satisfecho">Satisfecho</label><br>
+
+    <input type="radio" id="neutral" name="nivelSatisfaccion" value="Neutral" th:field="*{nivelSatisfaccion}" th:checked="${encuesta.nivelSatisfaccion == 'Neutral'}" />
+    <label for="neutral">Neutral</label><br>
+
+    <input type="radio" id="insatisfecho" name="nivelSatisfaccion" value="Insatisfecho" th:field="*{nivelSatisfaccion}" th:checked="${encuesta.nivelSatisfaccion == 'Insatisfecho'}" />
+    <label for="insatisfecho">Insatisfecho</label><br>
+
+    <input type="radio" id="muyInsatisfecho" name="nivelSatisfaccion" value="Muy Insatisfecho" th:field="*{nivelSatisfaccion}" th:checked="${encuesta.nivelSatisfaccion == 'Muy Insatisfecho'}" />
+    <label for="muyInsatisfecho">Muy Insatisfecho</label><br>
+    <br>
+
+    <textarea id="otrosComentarios" name="otrosComentarios" rows="4" cols="50" th:field="*{otrosComentarios}"></textarea>
+    <br><br>
+
+    <input type="submit" value="Editar Encuesta">
+</form>
+</body>
+</html>

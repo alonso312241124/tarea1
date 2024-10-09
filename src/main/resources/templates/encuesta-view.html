@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Encuesta</title>
+</head>
+<body>
+Nombre:                     <span th:text="${encuesta.nombre}"></span><br>
+Apellidos:                  <span th:text="${encuesta.apellidos}"></span><br>
+Email:                      <span th:text="${encuesta.email}"></span><br>
+Edad:                       <span th:text="${encuesta.edad}"></span><br>
+Telefono:                   <span th:text="${encuesta.telefono}"></span><br>
+Fecha:                      <span th:text="${encuesta.fecha}"></span><br>
+Motivo de la visita:        <span th:text="${encuesta.motivoVisita}"></span><br>
+
+Servicios utilizados:
+<ul>
+    <li th:if="${encuesta.restaurante}">Restaurante</li>
+    <li th:if="${encuesta.gimnasio}">Gimnasio</li>
+    <li th:if="${encuesta.spa}">Spa</li>
+    <li th:if="${encuesta.piscina}">Piscina</li>
+    <li th:if="${encuesta.roomService}">Room Service</li>
+</ul>
+
+Nivel de satisfacción:      <span th:text="${encuesta.nivelSatisfaccion}"></span><br>
+Otros comentarios:          <span th:text="${encuesta.otrosComentarios}"></span><br>
+
+<br>
+<a th:href="@{/encuestas/admin}">Volver al listado</a>
+</body>
+</html>
